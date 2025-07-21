@@ -2,48 +2,169 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>استبيان تحسين حركة المرور</title>
+  <title>استبيان المرور الحضري الرمزي</title>
   <style>
-    body { font-family: 'Segoe UI', Tahoma; background: #f4f7f9; padding: 40px; color: #222; direction: rtl; }
-    .container { background: #fff; padding: 30px; max-width: 600px; margin: auto; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
-    h1 { text-align: center; color: #00695c; }
-    label { display: block; margin-top: 15px; margin-bottom: 5px; font-weight: bold; }
-    input[type="text"], textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; }
-    .options { margin-bottom: 15px; }
-    button { background-color: #00897b; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
-    button:hover { background-color: #00716a; }
+    body {
+      font-family: "Segoe UI", Tahoma;
+      background-color: #f6f9f7;
+      padding: 40px;
+      color: #2e3c36;
+      direction: rtl;
+    }
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    h1 {
+      text-align: center;
+      color: #00695c;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+    .options label {
+      display: block;
+      margin: 6px 0;
+    }
+    button {
+      background-color: #00897b;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #00695c;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>📝 استبيان تحسين حركة المرور أمام المدارس</h1>
+  <h1>📝 استبيان المرور الحضري الرمزي</h1>
 
   <form onsubmit="sendToWhatsApp(); return false;">
     <label for="name">الاسم:</label>
     <input type="text" id="name" required>
 
-    <label>ما رأيك في المشكلة المرورية الصباحية؟</label>
+    <label for="gender">الجنس:</label>
+    <select id="gender" required>
+      <option value="">اختر...</option>
+      <option value="ذكر">ذكر</option>
+      <option value="أنثى">أنثى</option>
+    </select>
+
+    <label for="age">الفئة العمرية:</label>
+    <select id="age" required>
+      <option value="">اختر...</option>
+      <option value="15–25">15–25 سنة</option>
+      <option value="26–35">26–35 سنة</option>
+      <option value="36–45">36–45 سنة</option>
+      <option value="46–55">46–55 سنة</option>
+      <option value="56+">أكثر من 56 سنة</option>
+    </select>
+
+    <label>1. هل تواجه ازدحامًا صباحيًا عند توصيل الأطفال؟</label>
     <div class="options">
-      <label><input type="radio" name="opinion" value="حرجة ومزعجة" required> حرجة ومزعجة</label>
-      <label><input type="radio" name="opinion" value="قابلة للحل المجتمعي"> قابلة للحل المجتمعي</label>
-      <label><input type="radio" name="opinion" value="لا تؤثر عليّ مباشرة"> لا تؤثر عليّ مباشرة</label>
+      <label><input type="radio" name="q1" value="نعم يوميًا" required> نعم يوميًا</label>
+      <label><input type="radio" name="q1" value="أحيانًا فقط"> أحيانًا فقط</label>
+      <label><input type="radio" name="q1" value="لا أواجه"> لا أواجه</label>
     </div>
 
-    <label for="notes">ملاحظات أو اقتراحات إضافية:</label>
-    <textarea id="notes" rows="4"></textarea>
+    <label>2. ما أكثر نقطة ضغط مروري تعاني منها؟</label>
+    <input type="text" id="q2">
 
-    <button type="submit">إرسال الرد عبر واتساب</button>
+    <label>3. هل تستخدم وسيلة نقل جماعية؟</label>
+    <div class="options">
+      <label><input type="radio" name="q3" value="نعم"> نعم</label>
+      <label><input type="radio" name="q3" value="لا"> لا</label>
+      <label><input type="radio" name="q3" value="أحيانًا"> أحيانًا</label>
+    </div>
+
+    <label>4. ما تقييمك لأمان وسائل النقل الحالية؟</label>
+    <select id="q4">
+      <option value="">اختر...</option>
+      <option value="آمنة جدًا">آمنة جدًا</option>
+      <option value="مقبولة">مقبولة</option>
+      <option value="ضعيفة">ضعيفة</option>
+    </select>
+
+    <label>5. هل تثق بحلول ذكية محوسبة لتنظيم المرور؟</label>
+    <div class="options">
+      <label><input type="radio" name="q5" value="أثق بها تمامًا"> أثق بها تمامًا</label>
+      <label><input type="radio" name="q5" value="قد تكون مفيدة"> قد تكون مفيدة</label>
+      <label><input type="radio" name="q5" value="أفضل الأساليب اليدوية"> أفضل الأساليب اليدوية</label>
+    </div>
+
+    <label>6. هل تعتقد أن تركيب كاميرات ذكية سيحسن الانسياب؟</label>
+    <select id="q6">
+      <option value="">اختر...</option>
+      <option value="نعم">نعم</option>
+      <option value="ربما">ربما</option>
+      <option value="لا">لا</option>
+    </select>
+
+    <label>7. هل يرفض أطفالك استخدام الحافلة؟ ولماذا؟</label>
+    <input type="text" id="q7">
+
+    <label>8. ما اقتراحك المباشر لحل الأزمة؟</label>
+    <textarea id="q8" rows="3"></textarea>
+
+    <label>9. هل تفضل دخول المركبات لساحة داخل المدرسة؟</label>
+    <select id="q9">
+      <option value="">اختر...</option>
+      <option value="نعم">نعم</option>
+      <option value="لا">لا</option>
+      <option value="حسب التصميم">حسب التصميم</option>
+    </select>
+
+    <label>10. هل توافق على منع المرور غير المدرسي وقت الذروة؟</label>
+    <div class="options">
+      <label><input type="radio" name="q10" value="أوافق"> أوافق</label>
+      <label><input type="radio" name="q10" value="لا أوافق"> لا أوافق</label>
+      <label><input type="radio" name="q10" value="بحسب الظروف"> بحسب الظروف</label>
+    </div>
+
+    <button type="submit">📲 تقديم الرد عبر واتساب</button>
   </form>
 </div>
 
 <script>
 function sendToWhatsApp() {
-  const name = document.getElementById("name").value.trim();
-  const opinion = document.querySelector('input[name="opinion"]:checked')?.value || "لم يتم اختيار رأي";
-  const notes = document.getElementById("notes").value.trim();
+  const responses = [
+    `👤 الاسم: ${document.getElementById("name").value}`,
+    `⚧️ الجنس: ${document.getElementById("gender").value}`,
+    `📊 العمر: ${document.getElementById("age").value}`,
+    `1️⃣ ${document.querySelector('input[name="q1"]:checked')?.value || "—"}`,
+    `2️⃣ ${document.getElementById("q2").value || "—"}`,
+    `3️⃣ ${document.querySelector('input[name="q3"]:checked')?.value || "—"}`,
+    `4️⃣ ${document.getElementById("q4").value || "—"}`,
+    `5️⃣ ${document.querySelector('input[name="q5"]:checked')?.value || "—"}`,
+    `6️⃣ ${document.getElementById("q6").value || "—"}`,
+    `7️⃣ ${document.getElementById("q7").value || "—"}`,
+    `8️⃣ ${document.getElementById("q8").value || "—"}`,
+    `9️⃣ ${document.getElementById("q9").value || "—"}`,
+    `🔟 ${document.querySelector('input[name="q10"]:checked')?.value || "—"}`
+  ];
 
-  const message = `📝 استبيان فطرة الرمزي:\n👤 الاسم: ${name}\n📌 الرأي: ${opinion}\n🗒️ ملاحظات: ${notes || "لا توجد"}`;
+  const message = `📝 استبيان المرور الحضري:\n` + responses.join("\n");
   const waURL = `https://wa.me/00972533072008?text=${encodeURIComponent(message)}`;
   window.open(waURL, "_blank");
 }
