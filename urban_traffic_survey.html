@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>استبيان تحسين حركة المرور</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma; background: #f4f7f9; padding: 40px; color: #222; direction: rtl; }
+    .container { background: #fff; padding: 30px; max-width: 600px; margin: auto; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    h1 { text-align: center; color: #00695c; }
+    label { display: block; margin-top: 15px; margin-bottom: 5px; font-weight: bold; }
+    input[type="text"], textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; }
+    .options { margin-bottom: 15px; }
+    button { background-color: #00897b; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
+    button:hover { background-color: #00716a; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>📝 استبيان تحسين حركة المرور أمام المدارس</h1>
+
+  <form onsubmit="sendToWhatsApp(); return false;">
+    <label for="name">الاسم:</label>
+    <input type="text" id="name" required>
+
+    <label>ما رأيك في المشكلة المرورية الصباحية؟</label>
+    <div class="options">
+      <label><input type="radio" name="opinion" value="حرجة ومزعجة" required> حرجة ومزعجة</label>
+      <label><input type="radio" name="opinion" value="قابلة للحل المجتمعي"> قابلة للحل المجتمعي</label>
+      <label><input type="radio" name="opinion" value="لا تؤثر عليّ مباشرة"> لا تؤثر عليّ مباشرة</label>
+    </div>
+
+    <label for="notes">ملاحظات أو اقتراحات إضافية:</label>
+    <textarea id="notes" rows="4"></textarea>
+
+    <button type="submit">إرسال الرد عبر واتساب</button>
+  </form>
+</div>
+
+<script>
+function sendToWhatsApp() {
+  const name = document.getElementById("name").value.trim();
+  const opinion = document.querySelector('input[name="opinion"]:checked')?.value || "لم يتم اختيار رأي";
+  const notes = document.getElementById("notes").value.trim();
+
+  const message = `📝 استبيان فطرة الرمزي:\n👤 الاسم: ${name}\n📌 الرأي: ${opinion}\n🗒️ ملاحظات: ${notes || "لا توجد"}`;
+  const waURL = `https://wa.me/00972533072008?text=${encodeURIComponent(message)}`;
+  window.open(waURL, "_blank");
+}
+</script>
+
+</body>
+</html>
