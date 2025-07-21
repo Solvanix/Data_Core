@@ -53,6 +53,12 @@
     button:hover {
       background-color: #00695c;
     }
+    hr {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      border: none;
+      border-top: 1px dashed #ccc;
+    }
   </style>
 </head>
 <body>
@@ -143,6 +149,12 @@
     </div>
 
     <button type="submit">📲 تقديم الرد عبر واتساب</button>
+
+    <hr>
+
+    <label for="feedback">💡 شاركنا فكرتك أو توصيتك أو نقدك البناء:</label>
+    <textarea id="feedback" rows="3" placeholder="اكتب فكرتك هنا..."></textarea>
+    <button type="button" onclick="shareIdea()">💌 شاركنا فكرتك عبر واتساب</button>
   </form>
 </div>
 
@@ -168,7 +180,10 @@ function sendToWhatsApp() {
   const waURL = `https://wa.me/00972533072008?text=${encodeURIComponent(message)}`;
   window.open(waURL, "_blank");
 }
-</script>
 
-</body>
-</html>
+function shareIdea() {
+  const name = document.getElementById("name").value || "مشارك بدون اسم";
+  const feedback = document.getElementById("feedback").value.trim();
+
+  if (!feedback) {
+    alert("✍️ من فض
