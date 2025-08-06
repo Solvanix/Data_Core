@@ -4,18 +4,87 @@
   <meta charset="UTF-8">
   <title>عرض كتاب الثقافة الإسلامية</title>
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+    body { font-family: sans-serif; margin: 0; padding: 0; background: #f9f9f9; direction: rtl; }
     header { background: #004d7a; color: white; padding: 1em; text-align: center; }
-    iframe { border: none; width: 100%; height: 90vh; }
+    .buttons { text-align: center; margin: 1em; }
+    .buttons a { margin: 0 1em; padding: 0.5em 1em; background: #0077aa; color: white; text-decoration: none; border-radius: 5px; }
+    .viewer { max-width: 800px; margin: auto; padding: 1em; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .image-container { text-align: center; margin-bottom: 1em; }
+    .image-container img { max-width: 100%; height: auto; border: 1px solid #ccc; }
+    .text-container { background: #eef; padding: 1em; border-radius: 5px; white-space: pre-wrap; font-family: 'Courier New', monospace; }
+    .navigation { text-align: center; margin-top: 1em; }
+    .navigation button { margin: 0 1em; padding: 0.5em 1em; background: #004d7a; color: white; border: none; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
 <body>
   <header>
     <h1>📘 كتاب الثقافة الإسلامية - المدرسة العصرية</h1>
   </header>
-  <iframe src="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Raw_Sources/Universities/alasriyya/nird_islamic_culture_curriculum_comprehensive.pdf">
-    المتصفح لا يدعم عرض ملفات PDF. يمكنك تحميل الملف من
-    <a href="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Raw_Sources/Universities/alasriyya/nird_islamic_culture_curriculum_comprehensive.pdf">هنا</a>.
-  </iframe>
+
+  <div class="buttons">
+    <a href="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Raw_Sources/Universities/alasriyya/nird_islamic_culture_curriculum_comprehensive.pdf" download>📥 تحميل الكتاب PDF</a>
+    <a href="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Processed_Sources/nird_islamic_culture_curriculum_comprehensive_alasriyya_extracted.txt" download>📥 تحميل النص المعالج</a>
+  </div>
+
+  <div class="viewer">
+    <div class="image-container">
+      <img id="bookImage" src="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Documentation/symbolic_pages/page_01.png" alt="صفحة 1">
+    </div>
+    <div class="text-container" id="pageText">
+      جاري تحميل النص...
+    </div>
+    <div class="navigation">
+      <button onclick="prevPage()">⬅️ السابق</button>
+      <span id="pageNumber">1</span>
+      <button onclick="nextPage()">التالي ➡️</button>
+    </div>
+  </div>
+
+  <script>
+    const totalPages = 20; // عدّل حسب عدد الصور
+    let currentPage = 1;
+    let fullText = "";
+
+    async function loadText() {
+      try {
+        const response = await fetch("https://raw.githubusercontent.com/Solvanix/Data_Core/main/Processed_Sources/nird_islamic_culture_curriculum_comprehensive_alasriyya_extracted.txt");
+        fullText = await response.text();
+        updateText();
+      } catch (error) {
+        document.getElementById("pageText").textContent = "حدث خطأ أثناء تحميل النص.";
+      }
+    }
+
+    function updateImage() {
+      const img = document.getElementById("bookImage");
+      img.src = `https://raw.githubusercontent.com/Solvanix/Data_Core/main/Documentation/symbolic_pages/page_${String(currentPage).padStart(2, '0')}.png`;
+      document.getElementById("pageNumber").textContent = currentPage;
+    }
+
+    function updateText() {
+      const pages = fullText.split(/--- الصفحة \d+ ---/).filter(x => x.trim() !== "");
+      const pageIndex = currentPage - 1;
+      const pageContent = pages[pageIndex] || "لا يوجد محتوى لهذه الصفحة.";
+      document.getElementById("pageText").textContent = pageContent.trim();
+    }
+
+    function nextPage() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        updateImage();
+        updateText();
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        updateImage();
+        updateText();
+      }
+    }
+
+    loadText();
+  </script>
 </body>
 </html>
