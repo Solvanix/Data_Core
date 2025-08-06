@@ -28,7 +28,7 @@
 
   <div class="viewer">
     <div class="image-container">
-      <img id="bookImage" src="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Documentation/symbolic_pages/page_01.png" alt="صفحة 1">
+      <img id="bookImage" src="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Documentation/symbolic_pages/page_001.png" alt="صفحة 1">
     </div>
     <div class="text-container" id="pageText">
       جاري تحميل النص...
@@ -41,7 +41,7 @@
   </div>
 
   <script>
-    const totalPages = 20; // عدّل حسب عدد الصور
+    const totalPages = 14; // عدّل حسب عدد الصور المرفوعة
     let currentPage = 1;
     let fullText = "";
 
@@ -57,7 +57,7 @@
 
     function updateImage() {
       const img = document.getElementById("bookImage");
-      img.src = `https://raw.githubusercontent.com/Solvanix/Data_Core/main/Documentation/symbolic_pages/page_${String(currentPage).padStart(2, '0')}.png`;
+      img.src = `https://raw.githubusercontent.com/Solvanix/Data_Core/main/Documentation/symbolic_pages/page_${String(currentPage).padStart(3, '0')}.png`;
       document.getElementById("pageNumber").textContent = currentPage;
     }
 
