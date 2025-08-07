@@ -216,7 +216,7 @@
       : `⚠️ لا يوجد نص معالج للصفحة رقم ${currentPage}.`;
 
     // تحديث صورة الصفحة المصورة
-    document.getElementById("pageImage").src = `https://raw.githubusercontent.com/Solvanix/Data_Core/main/Raw_Sources/Universities/alasriyya/pages/page_${currentPage}.jpg`;
+    document.getElementById("pageImage").src = `../Documentation/symbolic_pages/page_${String(currentPage).padStart(3, \'0\')}.png`;
   }
 
   function prevPage() {
