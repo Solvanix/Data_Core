@@ -1,244 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8" />
-  <title>الواجهة الرمزية التفسيرية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      direction: rtl;
-      margin: 0;
-      background-color: #0d0d0d;
-      color: #FF9500;
-    }
-    header {
-      background-color: #111;
-      color: white;
-      padding: 16px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .main-layout {
-      display: grid;
-      grid-template-columns: 60% 40%;
-      gap: 20px;
-      padding: 20px;
-    }
-    .cards-area {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 15px;
-    }
-    .card {
-      background-color: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      overflow: auto;
-    }
-    .card.large {
-      grid-column: span 2;
-      height: auto;
-    }
-    .sidebar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 10px;
-    }
-    .sidebar > div {
-      flex: 1;
-      min-width: 300px;
-      background: rgba(255,255,255,0.05);
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .highlight-box {
-      background: rgba(255,255,255,0.07);
-      padding: 12px;
-      border-radius: 8px;
-      max-height: 500px;
-      overflow-y: auto;
-      font-size: 14px;
-      color: #eee;
-      white-space: pre-wrap;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-      color: #ccc;
-    }
-    ul li {
-      margin-bottom: 8px;
-    }
-    img {
-      width: 100%;
-      max-height: 300px;
-      object-fit: contain;
-      margin-top: 10px;
-      border-radius: 8px;
-    }
-    input, textarea {
-      width: 100%;
-      margin: 5px 0 10px;
-      padding: 8px;
-      border-radius: 6px;
-      border: none;
-      background-color: #222;
-      color: #FF9500;
-    }
-    button {
-      margin: 5px;
-      padding: 8px 12px;
-      background-color: #333;
-      color: #FF9500;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #444;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>🔍 الواجهة الرمزية التفسيرية</h1>
-</header>
-
-<div class="main-layout">
-  <div class="cards-area">
-    <!-- 🟨 بطاقة البصمة الرمزية الموسعة -->
-    <div class="card large">
-      <h3>🟨 بطاقة البصمة الرمزية</h3>
-      <p>📥 روابط التحميل:</p>
-      <a href="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Raw_Sources/Universities/alasriyya/nird_islamic_culture_curriculum_comprehensive.pdf" target="_blank">تحميل الكتاب PDF</a> |
-      <a href="https://raw.githubusercontent.com/Solvanix/Data_Core/main/Processed_Sources/nird_islamic_culture_curriculum_comprehensive_alasriyya_extracted.txt" target="_blank">تحميل النص المعالج</a>
-      <br><br>
-      <label>🔢 رقم الصفحة:</label>
-      <input type="number" id="pageInput" min="1" max="100" placeholder="أدخل رقم الصفحة" onchange="selectPage(this.value)">
-      <label>❓ سؤال معياري:</label>
-      <input type="text" id="standardQuestion" placeholder="مثال: ما معنى الثقافة؟">
-      <label>📜 مقطع مثالي من النص:</label>
-      <textarea id="textSnippet" rows="2" placeholder="أدخل جزءًا من النص المعالج..."></textarea>
-      <div>
-        <label>📄 النص المعالج:</label>
-        <div id="processedText" class="highlight-box">📄 جاري تحميل النص...</div>
-      </div>
-      <div>
-        <label>🖼️ الصفحة المصورة:</label>
-        <img id="pageImage" src="" alt="صورة الصفحة">
-      </div>
-    </div>
-
-    <!-- 🟩 بطاقة التحليل الرمزي المثالي -->
-    <div class="card">
-      <h3>🟩 التحليل الرمزي المثالي</h3>
-      <div class="highlight-box">🔎 التحليل سيظهر هنا بعد اختيار الصورة</div>
-    </div>
-
-    <!-- 🟥 معاينة المصادر الرمزية -->
-    <div class="card">
-      <h3>🟥 معاينة المصادر الرمزية</h3>
-      <ul>
-        <li>📄 استشهاد مباشر من المادة</li>
-        <li>📚 عرض الصفحة المرتبطة</li>
-        <li>🧭 مفاتيح رمزية مرتبطة بالسياق</li>
-      </ul>
-    </div>
-
-    <!-- 🟫 لوحة التحكم الرمزية -->
-    <div class="card">
-      <h3>🟫 لوحة التحكم</h3>
-      <button onclick="prevPage()">⬅️ السابق</button>
-      <button onclick="nextPage()">➡️ التالي</button>
-      <button onclick="clearAll()">🧹 إعادة تعيين</button>
-    </div>
-  </div>
-
-  <!-- 📌 المساحة القابلة للتخصيص + بطاقة البصمة الرمزية الذكية -->
-  <div class="sidebar">
-    <div>
-      <h3>📌 مساحة قابلة للتخصيص لاحقًا</h3>
-      <p>يمكنك هنا إضافة لوحة تحكم، أو خريطة رمزية، أو محتوى تفاعلي لاحقًا.</p>
-    </div>
-
-    <div>
-      <h3>🧠 بطاقة البصمة الرمزية الذكية</h3>
-      <p>النص المعالج (عرض مباشر):</p>
-      <div class="highlight-box">
-        المبحث الثامن الإنسانية والعالمية الإنسانية وصف منسوب إلى الإنسان...
-      </div>
-      <hr>
-      <h4>🛠️ المميزات المقترحة:</h4>
-      <ul>
-        <li>🔍 تحليل رمزي للنص: يكتشف الأخطاء ويظللها تلقائيًا.</li>
-        <li>📤 عرض النص الأصلي والمعالج: مقارنة مباشرة بين النسختين.</li>
-        <li>🛠️ أداة تصحيح تفاعلية: تعديل واقتراح تصحيحات.</li>
-        <li>📜 تمييز الآيات القرآنية: عرض خاص للآيات مع توثيقها.</li>
-        <li>🧠 تحليل رمزي مثالي: تفسير المعاني العميقة واقتراح رموز ثقافية.</li>
-        <li>🗂️ حفظ النسخ المصححة: تخزين ومشاركة النص بعد التصحيح.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<script>
-  let pagesText = {};
-  let currentPage = 1;
-  const totalPages = 100;
-
-  async function loadText() {
-    const response = await fetch("https://raw.githubusercontent.com/Solvanix/Data_Core/main/Processed_Sources/nird_islamic_culture_curriculum_comprehensive_alasriyya_extracted.txt");
-    const rawText = await response.text();
-    const pageChunks = rawText.split(/--- الصفحة (\d+) ---/g);
-    for (let i = 1; i < pageChunks.length; i += 2) {
-      const pageNum = parseInt(pageChunks[i]);
-      const pageContent = pageChunks[i + 1].trim();
-      pagesText[pageNum] = pageContent;
-    }
-    selectPage(currentPage);
-  }
-
-  function selectPage(pageNum) {
-    currentPage = parseInt(pageNum);
-    document.getElementById("pageInput").value = currentPage;
-    const pageText = pagesText[currentPage];
-        document.getElementById("processedText").textContent = pageText 
-      ? pageText 
-      : `⚠️ لا يوجد نص معالج للصفحة رقم ${currentPage}.`;
-
-    // تحديث صورة الصفحة المصورة
-    document.getElementById("pageImage").src = `../Documentation/symbolic_pages/page_${String(currentPage).padStart(3, \'0\')}.png`;
-  }
-
-  function prevPage() {
-    if (currentPage > 1) selectPage(currentPage - 1);
-  }
-
-  function nextPage() {
-    if (currentPage < totalPages) selectPage(currentPage + 1);
-  }
-
-  function clearAll() {
-    document.getElementById("pageInput").value = "";
-    document.getElementById("standardQuestion").value = "";
-    document.getElementById("textSnippet").value = "";
-    document.getElementById("processedText").textContent = "📄 جاري تحميل النص...";
-    document.getElementById("pageImage").src = "";
-  }
-
-  // تحميل النص عند فتح الصفحة
-  window.onload = loadText;
-</script>
-
-</body>
-</html>
-
