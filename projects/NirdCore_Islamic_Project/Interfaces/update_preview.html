@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <title>الواجهة الرمزية التفسيرية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      margin: 0;
+      background-color: #0d0d0d;
+      color: #FF9500;
+    }
+    header {
+      background-color: #111;
+      color: white;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .main-layout {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      gap: 20px;
+      padding: 20px;
+    }
+    .cards-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 15px;
+    }
+    .card {
+      background-color: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      overflow: auto;
+    }
+    .card.large {
+      grid-column: span 2;
+      height: auto;
+    }
+    .sidebar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 10px;
+    }
+    .sidebar > div {
+      flex: 1;
+      min-width: 300px;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .highlight-box {
+      background: rgba(255,255,255,0.07);
+      padding: 12px;
+      border-radius: 8px;
+      max-height: 500px;
+      overflow-y: auto;
+      font-size: 14px;
+      color: #eee;
+      white-space: pre-wrap;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      color: #ccc;
+    }
+    ul li {
+      margin-bottom: 8px;
+    }
+    img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+    input, textarea {
+      width: 100%;
+      margin: 5px 0 10px;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      background-color: #222;
+      color: #FF9500;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      background-color: #333;
+      color: #FF9500;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔍 الواجهة الرمزية التفسيرية</h1>
+  </header>
+  <div class="main-layout">
+    <div class="cards-area">
+      <!-- 🟨 بطاقة البصمة الرمزية الموسعة -->
+      <div class="card large">
+        <h3>🟨 بطاقة البصمة الرمزية</h3>
+        <p>📥 روابط التحميل:</p>
+        <a href="https://raw.githubusercontent.com/Solvanix/Data_Core/main/projects/NirdCore_Islamic_Project/Raw_Sources/Universities/alasriyya/nird_islamic_culture_curriculum_comprehensive.pdf" target="_blank">📘 تحميل الكتاب PDF</a> |
+        <a href="https://raw.githubusercontent.com/Solvanix/Data_Core/main/projects/NirdCore_Islamic_Project/Processed_Sources/nird_islamic_culture_curriculum_comprehensive_alasriyya_extracted.txt" target="_blank">📄 تحميل النص المعالج</a>
+        <br/><br/>
+
+        <label>🔢 رقم الصفحة:</label>
+        <button onclick="selectPage(document.getElementById('pageInput').value)">📄 تحميل الصفحة</button>
+        <input id="pageInput" max="305" min="1" onchange="selectPage(this.value)" placeholder="أدخل رقم الصفحة" type="number"/>
+
+        <label>❓ سؤال معياري:</label>
+        <input id="standardQuestion" placeholder="مثال: ما معنى الثقافة؟" type="text"/>
+
+        <label>📜 مقطع مثالي من النص:</label>
+        <textarea id="textSnippet" placeholder="أدخل جزءًا من النص المعالج..." rows="2"></textarea>
+
+        <div>
+          <label>📄 النص المعالج:</label>
+          <div class="highlight-box" id="processedText">📄 جاري تحميل النص...</div>
+        </div>
+
+        <div>
+          <label>🖼️ الصفحة المصورة:</label>
+          <img alt="صورة الصفحة" id="pageImage" src=""/>
+        </div>
+
+        <div>
+          <button onclick="downloadCurrentImage()">📥 تحميل الصورة الظاهرة</button>
+          <button onclick="downloadCurrentText()">📥 تحميل المقطع النصي الظاهر</button>
+        </div>
+
+        <div>
+          <button onclick="showConcepts()">🔍 استكشاف المفاهيم الرمزية</button>
+        </div>
+      </div>
+      <!-- 🟩 بطاقة التحليل الرمزي المثالي -->
+      <div class="card">
+        <h3>🟩 التحليل الرمزي المثالي</h3>
+        <div class="highlight-box">🔎 التحليل سيظهر هنا بعد اختيار الصورة</div>
+      </div>
+
+      <!-- 🟥 معاينة المصادر الرمزية -->
+      <div class="card">
+        <h3>🟥 معاينة المصادر الرمزية</h3>
+        <ul>
+          <li>📄 استشهاد مباشر من المادة</li>
+          <li>📚 عرض الصفحة المرتبطة</li>
+          <li>🧭 مفاتيح رمزية مرتبطة بالسياق</li>
+        </ul>
+      </div>
+
+      <!-- 🟫 لوحة التحكم الرمزية -->
+      <div class="card">
+        <h3>🟫 لوحة التحكم</h3>
+        <button onclick="prevPage()">⬅️ السابق</button>
+        <button onclick="nextPage()">➡️ التالي</button>
+        <button onclick="clearAll()">🧹 إعادة تعيين</button>
+      </div>
+    </div>
+
+    <!-- 📌 المساحة القابلة للتخصيص + بطاقة البصمة الرمزية الذكية -->
+    <div class="sidebar">
+      <div>
+        <h3>📌 مساحة قابلة للتخصيص لاحقًا</h3>
+        <p>يمكنك هنا إضافة لوحة تحكم، أو خريطة رمزية، أو محتوى تفاعلي لاحقًا.</p>
+      </div>
+      <div>
+        <h3>🧠 بطاقة البصمة الرمزية الذكية</h3>
+        <p>النص المعالج (عرض مباشر):</p>
+        <div class="highlight-box">
+          المبحث الثامن الإنسانية والعالمية الإنسانية وصف منسوب إلى الإنسان...
+        </div>
+        <hr/>
+        <h4>🛠️ المميزات المقترحة:</h4>
+        <ul>
+          <li>🔍 تحليل رمزي للنص: يكتشف الأخطاء ويظللها تلقائيًا.</li>
+          <li>📤 عرض النص الأصلي والمعالج: مقارنة مباشرة بين النسختين.</li>
+          <li>🛠️ أداة تصحيح تفاعلية: تعديل واقتراح تصحيحات.</li>
+          <li>📜 تمييز الآيات القرآنية: عرض خاص للآيات مع توثيقها.</li>
+          <li>🧠 تحليل رمزي مثالي: تفسير المعاني العميقة واقتراح رموز ثقافية.</li>
+          <li>🗂️ حفظ النسخ المصححة: تخزين ومشاركة النص بعد التصحيح.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔧 السكريبتات -->
+  <script>
+    function selectPage(pageNum) {
+      const img = document.getElementById("pageImage");
+      const textBox = document.getElementById("processedText");
+      const exts = ['.png', '.jpg', '.webp'];
+      let found = false;
+      const padded = String(pageNum).padStart(3, '0');
+
+      for (let ext of exts) {
+        let imgPath = "https://raw.githubusercontent.com/Solvanix/Data_Core/main/projects/NirdCore_Islamic_Project/Documentation/symbolic_pages/page_" + padded + ext;
+        let testImg = new Image();
+        testImg.src = imgPath;
+        testImg.onload = function() {
+          if (!found) {
+            img.src = imgPath;
+            found = true;
+          }
+        };
+      }
+
+      fetch("https://raw.githubusercontent.com/Solvanix/Data_Core/main/projects/NirdCore_Islamic_Project/Processed_Sources/nird_islamic_culture_curriculum_comprehensive_alasriyya_extracted.txt")
+      .then(res => res.text())
+      .then(fullText => {
+        const regex = new RegExp(`--- الصفحة ${pageNum} ---\\n([\\s\\S]*?)(\\n--- الصفحة|$)`, 'm');
+        const match = fullText.match(regex);
+        if (match) {
+          textBox.innerText = match[1].trim();
+        } else {
+          textBox.innerText = "❌ لم يتم العثور على النص.";
+        }
+      })
+      .catch(err => {
+        textBox.innerText = "❌ فشل تحميل النص.";
+      });
+    }
+
+    function downloadCurrentImage() {
+      const imgSrc = document.getElementById("pageImage").src;
+      if (imgSrc) {
+        const link = document.createElement('a');
+        link.href = imgSrc;
+        link.download = "page_image.png";
+        link.click();
+      } else {
+        alert("❌ لا توجد صورة حالية للتحميل.");
+      }
+    }
+
+    function downloadCurrentText() {
+      const text = document.getElementById("processedText").innerText;
+      if (text && text.trim() !== "") {
+        const blob = new Blob([text], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "page_text.txt";
+        link.click();
+      } else {
+        alert("❌ لا يوجد نص حالي للتحميل.");
+      }
+    }
+
+    function prevPage() {
+      const input = document.getElementById("pageInput");
+      let current = parseInt(input.value || "1");
+      if (current > 1) {
+        input.value = current - 1;
+        selectPage(current - 1);
+      }
+    }
+
+    function nextPage() {
+      const input = document.getElementById("pageInput");
+      let current = parseInt(input.value || "1");
+      if (current < 305) {
+        input.value = current + 1;
+        selectPage(current + 1);
+      }
+    }
+
+    function clearAll() {
+      document.getElementById("pageInput").value = "";
+      document.getElementById("standardQuestion").value = "";
+      document.getElementById("textSnippet").value = "";
+      document.getElementById("processedText").innerText = "📄 جاري تحميل النص...";
+      document.getElementById("pageImage").src = "";
+    }
+
+    function showConcepts() {
+      alert("🧠 سيتم لاحقًا تفعيل استكشاف المفاهيم الرمزية بناءً على النص والصورة.");
+    }
+  </script>
+</body>
+</html>
