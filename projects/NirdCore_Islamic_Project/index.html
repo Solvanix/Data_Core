@@ -1,94 +1,108 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>🧭 المتصفح الرمزي المصنف - NirdCore</title>
+  <meta charset="utf-8"/>
+  <title>📘 البوابة الرمزية الذكية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     body {
       font-family: 'Cairo', sans-serif;
       background-color: #0d0d0d;
       color: #FF9500;
+      direction: rtl;
       margin: 0;
-      padding: 20px;
+      padding: 0;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .category {
-      margin-bottom: 40px;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 20px;
+    header {
       background-color: #111;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
-    .category h2 {
-      margin-top: 0;
+    .notice {
+      background-color: #222;
+      border: 1px solid #444;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 900px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .notice h2 {
+      color: #ffa733;
+      margin-bottom: 10px;
+    }
+    .notice p {
+      color: #ccc;
+      line-height: 1.6;
+    }
+    .notice a, .notice button {
+      color: #FF9500;
+      font-weight: bold;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .notice a:hover, .notice button:hover {
       color: #ffa733;
     }
-    .symbol-card {
-      background-color: #1a1a1a;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #333;
-      box-shadow: 0 0 6px rgba(255,149,0,0.2);
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+      margin-top: 20px;
     }
-    .symbol-card h4 {
-      margin: 0 0 10px;
-      color: #FF9500;
-    }
-    .symbol-card p {
-      margin: 5px 0;
-      color: #ccc;
-      font-size: 0.95em;
+    #loadingMsg {
+      text-align: center;
+      color: #aaa;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🧭 المتصفح الرمزي المصنف - صفحات 90 إلى 110</h1>
+  <header>
+    <h1>📘 البوابة الرمزية الذكية</h1>
+    <p>واجهة مركزية تربط كل النماذج الرمزية وتعرض الخرائط التفسيرية</p>
+  </header>
 
-  <div id="browserArea">📄 جاري تحميل الرموز...</div>
+  <div class="notice">
+    <h2>🔗 هذه الصفحة:</h2>
+    <p>
+      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/index.html" target="_blank">
+        🌐 رابط العرض الذاتي
+      </a>
+    </p>
+
+    <h2>🧭 الواجهات الرمزية:</h2>
+    <p>
+      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer_modified.html" target="_blank">📘 كتالوج رمزي تفاعلي</a> |
+      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer.html" target="_blank">📘 النموذج الأساسي</a> |
+      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/update_preview.html" target="_blank">🛠️ واجهة التحديث</a>
+    </p>
+
+    <h2>🗺️ عرض الخرائط الرمزية:</h2>
+    <p>
+      <button onclick="loadFrame('https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/knowledge_map.html')">🧠 خريطة المعرفة</button>
+    </p>
+
+    <h2>🧠 النموذج الذكي (قريبًا):</h2>
+    <p>
+      <button disabled>🚧 جاري التهيئة...</button>
+    </p>
+  </div>
+
+  <div id="loadingMsg">⏳ جاري تحميل العرض...</div>
+  <iframe id="viewerFrame" src="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer_modified.html" onload="document.getElementById('loadingMsg').style.display='none';"></iframe>
 
   <script>
-    const mapPath = "metadata/knowledge_map.json"; // المسار الصحيح بعد نقل الصفحة إلى الجذر
-
-    fetch(mapPath)
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById("browserArea");
-        container.innerHTML = "";
-
-        for (const [category, entries] of Object.entries(data)) {
-          const section = document.createElement("div");
-          section.className = "category";
-
-          const heading = document.createElement("h2");
-          heading.textContent = `🧭 التصنيف: ${category} (${entries.length} صفحة)`;
-          section.appendChild(heading);
-
-          entries.forEach(entry => {
-            const pageNumber = entry.page.replace("page_", "");
-            const card = document.createElement("div");
-            card.className = "symbol-card";
-
-            card.innerHTML = `
-              <h4>🔹 ${entry.symbol}</h4>
-              <p><strong>📄 الصفحة:</strong> ${pageNumber}</p>
-              <p><strong>🔑 الكلمات المفتاحية:</strong> ${entry.keywords.join(', ')}</p>
-              <p><strong>📜 الوصف:</strong> ${entry.summary}</p>
-            `;
-            section.appendChild(card);
-          });
-
-          container.appendChild(section);
-        }
-      })
-      .catch(err => {
-        document.getElementById("browserArea").innerText = "❌ فشل تحميل الخريطة الرمزية.";
-      });
+    function loadFrame(url) {
+      document.getElementById('viewerFrame').src = url;
+      document.getElementById('loadingMsg').style.display = 'block';
+    }
   </script>
 
 </body>
