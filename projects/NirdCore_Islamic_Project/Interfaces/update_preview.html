@@ -204,6 +204,7 @@
   <!-- 🔧 السكريبتات -->
   <script>
     function selectPage(pageNum) {
+  localStorage.setItem("lastPage", pageNum);
       const img = document.getElementById("pageImage");
       const textBox = document.getElementById("processedText");
       const exts = ['.png', '.jpg', '.webp'];
@@ -217,6 +218,7 @@
         testImg.onload = function() {
           if (!found) {
             img.src = imgPath;
+            img.alt = "📷 جاري تحميل الصورة...";
             found = true;
           }
         };
@@ -292,6 +294,15 @@
     function showConcepts() {
       alert("🧠 سيتم لاحقًا تفعيل استكشاف المفاهيم الرمزية بناءً على النص والصورة.");
     }
-  </script>
+  
+  window.onload = function() {
+    const last = localStorage.getItem("lastPage");
+    if (last) {
+      document.getElementById("pageInput").value = last;
+      selectPage(parseInt(last));
+    }
+  };
+
+</script>
 </body>
 </html>
