@@ -11,50 +11,79 @@
       color: #FF9500;
       direction: rtl;
       margin: 0;
-      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
     }
+
     header {
       background-color: #111;
       color: white;
-      padding: 20px;
-      text-align: center;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
-    .notice {
-      background-color: #222;
-      border: 1px solid #444;
-      margin: 20px auto;
+
+    #sidebar {
+      background-color: #1a1a1a;
+      width: 250px;
       padding: 20px;
-      max-width: 900px;
-      border-radius: 10px;
-      text-align: center;
+      box-shadow: inset -1px 0 0 #333;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
-    .notice h2 {
-      color: #ffa733;
-      margin-bottom: 10px;
+
+    #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow: hidden;
     }
-    .notice p {
-      color: #ccc;
-      line-height: 1.6;
+
+    #viewerFrame {
+      flex: 1;
+      border: none;
+      width: 100%;
     }
-    .notice a, .notice button {
+
+    #footer {
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.6);
+    }
+
+    a, button {
       color: #FF9500;
       font-weight: bold;
       text-decoration: none;
       background: none;
       border: none;
       cursor: pointer;
-      margin: 5px;
     }
-    .notice a:hover, .notice button:hover {
+
+    a:hover, button:hover {
       color: #ffa733;
     }
-    iframe {
-      width: 100%;
-      height: 800px;
-      border: none;
-      margin-top: 20px;
+
+    .container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
     }
+
+    .section-title {
+      color: #ffa733;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
     #loadingMsg {
       text-align: center;
       color: #aaa;
@@ -65,38 +94,43 @@
 <body>
 
   <header>
-    <h1>📘 البوابة الرمزية الذكية</h1>
-    <p>واجهة مركزية تربط كل النماذج الرمزية وتعرض الخرائط التفسيرية</p>
+    <div>📘 البوابة الرمزية الذكية</div>
+    <div>🧠 حالة الجلسة: جاهز</div>
   </header>
 
-  <div class="notice">
-    <h2>🔗 هذه الصفحة:</h2>
-    <p>
-      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/index.html" target="_blank">
-        🌐 رابط العرض الذاتي
-      </a>
-    </p>
+  <div class="container">
+    <div id="sidebar">
+      <div>
+        <div class="section-title">🔗 روابط العرض:</div>
+        <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/index.html" target="_blank">🌐 العرض الذاتي</a>
+      </div>
+      <div>
+        <div class="section-title">🧭 الواجهات الرمزية:</div>
+        <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer_modified.html" target="_blank">📘 كتالوج رمزي</a><br/>
+        <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer.html" target="_blank">📘 النموذج الأساسي</a><br/>
+        <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/update_preview.html" target="_blank">🛠️ واجهة التحديث</a>
+      </div>
+      <div>
+        <div class="section-title">🗺️ الخرائط الرمزية:</div>
+        <button onclick="loadFrame('https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/knowledge_map.html')">🧠 خريطة المعرفة</button>
+      </div>
+      <div>
+        <div class="section-title">🧠 النموذج الذكي:</div>
+        <button disabled>🚧 جاري التهيئة...</button>
+      </div>
+    </div>
 
-    <h2>🧭 الواجهات الرمزية:</h2>
-    <p>
-      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer_modified.html" target="_blank">📘 كتالوج رمزي تفاعلي</a> |
-      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer.html" target="_blank">📘 النموذج الأساسي</a> |
-      <a href="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/update_preview.html" target="_blank">🛠️ واجهة التحديث</a>
-    </p>
-
-    <h2>🗺️ عرض الخرائط الرمزية:</h2>
-    <p>
-      <button onclick="loadFrame('https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/knowledge_map.html')">🧠 خريطة المعرفة</button>
-    </p>
-
-    <h2>🧠 النموذج الذكي (قريبًا):</h2>
-    <p>
-      <button disabled>🚧 جاري التهيئة...</button>
-    </p>
+    <div id="main">
+      <div id="loadingMsg">⏳ جاري تحميل العرض...</div>
+      <iframe id="viewerFrame" src="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer_modified.html" onload="document.getElementById('loadingMsg').style.display='none';"></iframe>
+    </div>
   </div>
 
-  <div id="loadingMsg">⏳ جاري تحميل العرض...</div>
-  <iframe id="viewerFrame" src="https://solvanix.github.io/Data_Core/projects/NirdCore_Islamic_Project/Interfaces/book_viewer_modified.html" onload="document.getElementById('loadingMsg').style.display='none';"></iframe>
+  <div id="footer">
+    <div>🎙️ تسجيل ملاحظة رمزية</div>
+    <div>📎 إرفاق مادة تعليمية</div>
+    <div>🧩 وظيفة قيد التحديد</div>
+  </div>
 
   <script>
     function loadFrame(url) {
